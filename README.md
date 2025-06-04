@@ -76,11 +76,11 @@ npm start
 ## 🔑 **Deployment Keys**
 
 ### Stellar Testnet Account
-- **Public Key**: `GAF5A4KVGY36WPZ5IAMCASWXD4GOPWJGHB3BZKFDRFCGZ2TKBQNQR53A`
-- **Secret Key**: `SBD4BPXBCD6ZG5D6VZGACRVBN6AURI3HQZH4OFRIKTDKJ53YUXGCUHXT`
+- **Public Key**: `GABPY5NIYCCFDSDJ6UYJCCPSQKEAADXGKZHRGQDKS3R26M`
+- **Secret Key**: `SD7OHA5IR7NER53GWZCNP7TCG5UBMTBUESGHUMSGHK2YT7V4TDOYBZF4`
 
 ### Smart Contract
-- **Contract ID**: `CBQAAC4EHNMMHEI2W3QU6UQ5N4KSVYRLVTB5M2XMARCNS4CNLWMX3VQ6`
+- **Contract ID**: `CCV2WYCBHUAYRDSCTPJSNKLA2KA5MCLHKMMCV7BSAQSB4CM67H7R356E`
 - **Network**: Stellar Testnet
 
 ### Network Configuration
@@ -440,4 +440,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 [Website](link) • [Documentation](link) • [Discord](link) • [Twitter](link)
 
-</div>
+</div> 
