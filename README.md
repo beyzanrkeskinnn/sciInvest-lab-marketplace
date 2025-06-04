@@ -73,15 +73,17 @@ npm start
 
 ---
 
-## 🔑 **Deployment Keys**
+## 🔑 **Development Setup**
 
 ### Stellar Testnet Account
-- **Public Key**: `GABPY5NIYCCFDSDJ6UYJCCPSQKEAADXGKZHRGQDKS3R26M`
-- **Secret Key**: `SD7OHA5IR7NER53GWZCNP7TCG5UBMTBUESGHUMSGHK2YT7V4TDOYBZF4`
+To set up your development environment:
+1. Create a Stellar testnet account using [Stellar Laboratory](https://laboratory.stellar.org/)
+2. Fund your account using the [Stellar Testnet Friendbot](https://laboratory.stellar.org/#account-creator)
+3. Store your keys securely (never commit them to version control)
 
-### Smart Contract
-- **Contract ID**: `CCV2WYCBHUAYRDSCTPJSNKLA2KA5MCLHKMMCV7BSAQSB4CM67H7R356E`
+### Smart Contract Development
 - **Network**: Stellar Testnet
+- For contract deployment instructions, see our [Deployment Guide](docs/deployment.md)
 
 ### Network Configuration
 ```typescript
