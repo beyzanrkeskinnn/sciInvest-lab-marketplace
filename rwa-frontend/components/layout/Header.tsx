@@ -92,43 +92,17 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between px-4">
-        {/* Logo and Navigation */}
-        <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-3">
-            <Building2 className="h-8 w-8 text-primary" />
-            <div>
-              <h1 className="text-lg font-bold">RWA Investor</h1>
-              <p className="text-xs text-muted-foreground">Real World Assets</p>
-            </div>
+      <div className="container flex h-14 items-center">
+        <div className="mr-4 hidden md:flex">
+          <Link href="/" className="mr-6 flex items-center space-x-2">
+            <Building2 className="h-6 w-6" />
+            <span className="font-bold">SciInvest Lab</span>
           </Link>
-
-          {/* Navigation Links */}
-          <nav className="hidden md:flex items-center gap-6">
-            <Link 
-              href="/dashboard" 
-              className="text-sm font-medium transition-colors hover:text-primary"
-            >
-              Dashboard
-            </Link>
-            <Link 
-              href="/marketplace" 
-              className="text-sm font-medium transition-colors hover:text-primary"
-            >
-              Marketplace
-            </Link>
-            <Link 
-              href="/tokenize" 
-              className="text-sm font-medium transition-colors hover:text-primary"
-            >
-              Tokenize
-            </Link>
-            <Link 
-              href="/transfer" 
-              className="text-sm font-medium transition-colors hover:text-primary"
-            >
-              Transfer
-            </Link>
+          <nav className="flex items-center space-x-6 text-sm font-medium">
+            <Link href="/" className="transition-colors hover:text-foreground/80">Research Dashboard</Link>
+            <Link href="/marketplace" className="transition-colors hover:text-foreground/80">Project Marketplace</Link>
+            <Link href="/tokenize" className="transition-colors hover:text-foreground/80">Tokenize Research</Link>
+            <Link href="/transfer" className="transition-colors hover:text-foreground/80">Share Transfer</Link>
           </nav>
         </div>
 
@@ -219,4 +193,4 @@ export function Header() {
       </div>
     </header>
   );
-} 
+}

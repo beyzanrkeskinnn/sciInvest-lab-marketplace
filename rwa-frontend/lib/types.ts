@@ -265,4 +265,35 @@ export interface FinancialsFormData {
   managementFee: string;
   distributionFrequency: 'monthly' | 'quarterly' | 'annually';
   estimatedAppreciation: string;
-} 
+}
+
+export interface ScienceAsset {
+  id: string;
+  name: string;
+  symbol: string;
+  asset_type: 'Laboratory Project' | 'Research Study' | 'Scientific Patent' | 'Dataset';
+  creator_info: {
+    name: string;
+    location: string;
+    experience_years: number;
+    certifications: string[];
+  };
+  asset_details: {
+    methodology: string;
+    technology_readiness: number;
+    research_phase: string;
+    peer_reviewed: boolean;
+  };
+  timeline_info: {
+    start_date: string;
+    next_milestone: string;
+    estimated_completion: string;
+    quality_grade: 'A' | 'B' | 'C';
+  };
+  financial: {
+    funding_goal: number;
+    current_funding: number;
+    token_price: number;
+    total_supply: number;
+  };
+}

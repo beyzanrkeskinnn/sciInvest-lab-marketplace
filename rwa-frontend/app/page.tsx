@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { formatTokenAmount, formatCurrency, formatPercentage } from '@/lib/stellar';
 import Link from 'next/link';
+import { SAMPLE_PROJECTS } from '@/lib/contract';
 
 export default function Dashboard() {
   const { isConnected, address, checkConnection } = useWalletStore();
@@ -44,6 +45,14 @@ export default function Dashboard() {
       fetchUserData(address);
     }
   }, [isConnected, address, fetchUserData]);
+
+  // Calculate total portfolio value
+  const totalPortfolioValue = SAMPLE_PROJECTS.reduce((sum, project) => 
+    sum + project.financial.current_funding, 0
+  );
+
+  // Calculate active projects
+  const activeProjects = SAMPLE_PROJECTS.length;
 
   if (!isConnected) {
     return (
@@ -117,66 +126,62 @@ export default function Dashboard() {
             </p>
           </div>
 
-          {/* Portfolio Overview Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          {/* Research Dashboard */}
+          <div className="space-y-4">
+            <h1 className="text-3xl font-bold">Research Dashboard</h1>
+            <p className="text-muted-foreground mt-1">
+              Your scientific research portfolio overview
+            </p>
+          </div>
+
+          {/* Metrics Overview */}
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Your Holdings</CardTitle>
-                <Building2 className="h-4 w-4 text-muted-foreground" />
+              <CardHeader className="flex flex-row items-center justify-between pb-2">
+                <CardTitle className="text-sm font-medium">Research Value</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
-                  {formatTokenAmount(userBalance)} LAPT
+                  ${totalPortfolioValue.toLocaleString()}
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  ≈ {formatCurrency(
-                    (parseFloat(formatTokenAmount(userBalance)) * 1000).toString()
-                  )}
+                  Total funded research
                 </p>
               </CardContent>
             </Card>
 
             <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Compliance Status</CardTitle>
-                {isWhitelisted ? (
-                  <CheckCircle className="h-4 w-4 text-green-600" />
-                ) : (
-                  <AlertCircle className="h-4 w-4 text-yellow-600" />
-                )}
+              <CardHeader className="flex flex-row items-center justify-between pb-2">
+                <CardTitle className="text-sm font-medium">Active Projects</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">
-                  {isWhitelisted ? 'Verified' : 'Pending'}
-                </div>
+                <div className="text-2xl font-bold">{activeProjects}</div>
                 <p className="text-xs text-muted-foreground">
-                  {compliance?.kyc_verified ? 'KYC Complete' : 'KYC Required'}
+                  Ongoing research
                 </p>
               </CardContent>
             </Card>
 
             <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Est. Annual Yield</CardTitle>
-                <TrendingUp className="h-4 w-4 text-muted-foreground" />
+              <CardHeader className="flex flex-row items-center justify-between pb-2">
+                <CardTitle className="text-sm font-medium">Research Impact</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">8.5%</div>
+                <div className="text-2xl font-bold">High</div>
                 <p className="text-xs text-muted-foreground">
-                  Rental income + appreciation
+                  Based on citations
                 </p>
               </CardContent>
             </Card>
 
             <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Next Distribution</CardTitle>
-                <Clock className="h-4 w-4 text-muted-foreground" />
+              <CardHeader className="flex flex-row items-center justify-between pb-2">
+                <CardTitle className="text-sm font-medium">Ethics Status</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">15 days</div>
+                <div className="text-2xl font-bold">Compliant</div>
                 <p className="text-xs text-muted-foreground">
-                  Monthly rental payment
+                  All checks passed
                 </p>
               </CardContent>
             </Card>
@@ -236,84 +241,58 @@ export default function Dashboard() {
           )}
 
           {/* Quick Actions */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Investment Opportunities</CardTitle>
-                <CardDescription>
-                  Discover new tokenized assets to diversify your portfolio
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between p-3 border rounded-lg">
-                    <div>
-                      <p className="font-medium">Downtown Office Building</p>
-                      <p className="text-sm text-muted-foreground">Commercial Real Estate</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-bold">9.2% APY</p>
-                      <Badge variant="outline" className="text-xs">Coming Soon</Badge>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center justify-between p-3 border rounded-lg">
-                    <div>
-                      <p className="font-medium">Gold Storage Facility</p>
-                      <p className="text-sm text-muted-foreground">Commodities</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-bold">6.8% APY</p>
-                      <Badge variant="outline" className="text-xs">Q2 2025</Badge>
-                    </div>
-                  </div>
-                </div>
-                
-                <Button className="w-full" variant="outline" asChild>
-                  <Link href="/marketplace">
-                    View All Opportunities
-                    <ArrowRight className="h-4 w-4 ml-2" />
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <Button variant="outline" className="h-24">
+              <div className="flex flex-col items-center">
+                <span className="text-lg">🔬</span>
+                <span>Explore Projects</span>
+              </div>
+            </Button>
+            <Button variant="outline" className="h-24">
+              <div className="flex flex-col items-center">
+                <span className="text-lg">📊</span>
+                <span>Research Analytics</span>
+              </div>
+            </Button>
+            <Button variant="outline" className="h-24">
+              <div className="flex flex-col items-center">
+                <span className="text-lg">🧪</span>
+                <span>Tokenize Research</span>
+              </div>
+            </Button>
+            <Button variant="outline" className="h-24">
+              <div className="flex flex-col items-center">
+                <span className="text-lg">💼</span>
+                <span>Portfolio</span>
+              </div>
+            </Button>
+          </div>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Recent Activity</CardTitle>
-                <CardDescription>
-                  Your latest transactions and updates
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <div className="h-2 w-2 bg-green-500 rounded-full"></div>
-                    <div className="flex-1">
-                      <p className="text-sm font-medium">Welcome to RWA Investor</p>
-                      <p className="text-xs text-muted-foreground">Account created successfully</p>
+          {/* Recent Projects */}
+          <div>
+            <h2 className="text-xl font-semibold mb-4">Recent Projects</h2>
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {SAMPLE_PROJECTS.slice(0, 3).map((project) => (
+                <Card key={project.id}>
+                  <CardHeader>
+                    <CardTitle>{project.name}</CardTitle>
+                    <CardDescription>{project.asset_type}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <span className="text-sm text-muted-foreground">Progress</span>
+                        <span>{Math.round((project.financial.current_funding / project.financial.funding_goal) * 100)}%</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-sm text-muted-foreground">Phase</span>
+                        <span>{project.asset_details.research_phase}</span>
+                      </div>
                     </div>
-                    <p className="text-xs text-muted-foreground">Just now</p>
-                  </div>
-                  
-                  <div className="flex items-center gap-3">
-                    <div className="h-2 w-2 bg-blue-500 rounded-full"></div>
-                    <div className="flex-1">
-                      <p className="text-sm font-medium">Compliance Verification</p>
-                      <p className="text-xs text-muted-foreground">KYC status updated</p>
-                    </div>
-                    <p className="text-xs text-muted-foreground">2 min ago</p>
-                  </div>
-                </div>
-                
-                <Button className="w-full" variant="outline" asChild>
-                  <Link href="/transfer">
-                    Make Your First Transfer
-                    <ArrowRight className="h-4 w-4 ml-2" />
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
       </main>

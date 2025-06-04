@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RWA Investor - Real World Asset Platform",
-  description: "Access tokenized real estate, commodities, and other physical assets through compliant blockchain technology on Stellar.",
+  title: "SciInvest Lab Marketplace - Scientific Research Investment Platform",
+  description: "A platform for tokenizing laboratory projects and scientific innovations, connecting researchers with global investors.",
 };
 
 export default function RootLayout({

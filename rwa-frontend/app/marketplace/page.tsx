@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useWalletStore } from '@/stores/wallet';
 import { Header } from '@/components/layout/Header';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { 
@@ -24,6 +24,14 @@ import {
 } from 'lucide-react';
 import { formatCurrency, formatPercentage } from '@/lib/stellar';
 import Link from 'next/link';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { SAMPLE_PROJECTS } from "@/lib/contract";
 
 // Mock marketplace data
 const marketplaceAssets = [
@@ -152,6 +160,12 @@ export default function MarketplacePage() {
     });
   };
 
+  const filters = {
+    asset_type: ["Laboratory Project", "Research Study", "Scientific Patent", "Dataset"],
+    category: ["Biotechnology", "Physics", "Engineering", "Chemistry"],
+    certification: ["Peer Reviewed", "Patent Pending", "IRB Approved", "ISO Certified"]
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -261,6 +275,54 @@ export default function MarketplacePage() {
                     ))}
                   </select>
                 </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Science-specific Filters */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Filter className="h-5 w-5" />
+                Filter Research Projects
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Project Type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {filters.asset_type.map(type => (
+                      <SelectItem key={type} value={type}>{type}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {filters.category.map(cat => (
+                      <SelectItem key={cat} value={cat}>{cat}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Certification" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {filters.certification.map(cert => (
+                      <SelectItem key={cert} value={cert}>{cert}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+
+                <Button className="w-full">Search Projects</Button>
               </div>
             </CardContent>
           </Card>
@@ -404,8 +466,45 @@ export default function MarketplacePage() {
               </div>
             </CardContent>
           </Card>
+
+          {/* Research Project Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {SAMPLE_PROJECTS.map((project) => (
+              <Card key={project.id}>
+                <CardHeader>
+                  <CardTitle>{project.name}</CardTitle>
+                  <CardDescription>{project.asset_type}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Creator</span>
+                      <span className="font-medium">{project.creator_info.name}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Research Phase</span>
+                      <Badge>{project.asset_details.research_phase}</Badge>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Funding Progress</span>
+                      <span className="font-medium">
+                        {Math.round((project.financial.current_funding / project.financial.funding_goal) * 100)}%
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Token Price</span>
+                      <span className="font-medium">${project.financial.token_price}</span>
+                    </div>
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Button className="w-full">View Details</Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
         </div>
       </main>
     </div>
   );
-} 
+}

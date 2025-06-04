@@ -1,4 +1,4 @@
-# 🏢 RWA Investment Platform
+# 🧬 SciInvest Lab Marketplace
 
 A professional Real World Asset (RWA) tokenization and investment platform built on the Stellar blockchain. This platform enables investors to discover, invest in, and trade tokenized real world assets including real estate, commodities, and infrastructure projects.
 
@@ -69,6 +69,31 @@ npm run build
 
 # Start production server
 npm start
+```
+
+---
+
+## 🔑 **Deployment Keys**
+
+### Stellar Testnet Account
+- **Public Key**: `GAF5A4KVGY36WPZ5IAMCASWXD4GOPWJGHB3BZKFDRFCGZ2TKBQNQR53A`
+- **Secret Key**: `SBD4BPXBCD6ZG5D6VZGACRVBN6AURI3HQZH4OFRIKTDKJ53YUXGCUHXT`
+
+### Smart Contract
+- **Contract ID**: `CBQAAC4EHNMMHEI2W3QU6UQ5N4KSVYRLVTB5M2XMARCNS4CNLWMX3VQ6`
+- **Network**: Stellar Testnet
+
+### Network Configuration
+```typescript
+export const NETWORKS = {
+  testnet: {
+    name: 'Testnet',
+    networkPassphrase: Networks.TESTNET,
+    horizonUrl: 'https://horizon-testnet.stellar.org',
+    sorobanUrl: 'https://soroban-testnet.stellar.org',
+    explorerUrl: 'https://stellar.expert/explorer/testnet'
+  }
+};
 ```
 
 ---
@@ -415,4 +440,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 [Website](link) • [Documentation](link) • [Discord](link) • [Twitter](link)
 
-</div> 
+</div>

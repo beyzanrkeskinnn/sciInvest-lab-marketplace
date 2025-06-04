@@ -343,4 +343,68 @@ export const batchWhitelistAddresses = async (
   }
 
   return { success, failed };
-}; 
+};
+
+// Sample data for science research projects
+export const SAMPLE_PROJECTS = [
+  {
+    id: 'proj-001',
+    name: 'Quantum Sensor Development',
+    symbol: 'QSD',
+    asset_type: 'Laboratory Project',
+    creator_info: {
+      name: 'Dr. Sarah Chen',
+      location: 'MIT Labs',
+      experience_years: 12,
+      certifications: ['Peer Reviewed', 'ISO 9001']
+    },
+    asset_details: {
+      methodology: 'Quantum-based molecular detection',
+      technology_readiness: 7,
+      research_phase: 'Testing',
+      peer_reviewed: true
+    },
+    timeline_info: {
+      start_date: '2024-09-01',
+      next_milestone: '2025-03-01',
+      estimated_completion: '2025-12-01',
+      quality_grade: 'A'
+    },
+    financial: {
+      funding_goal: 100000,
+      current_funding: 65000,
+      token_price: 10,
+      total_supply: 10000
+    }
+  },
+  {
+    id: 'proj-002',
+    name: 'Biotech Research Initiative',
+    symbol: 'BRI',
+    asset_type: 'Research Study',
+    creator_info: {
+      name: 'Dr. James Wilson',
+      location: 'Stanford Research',
+      experience_years: 8,
+      certifications: ['IRB Approved']
+    },
+    asset_details: {
+      methodology: 'CRISPR gene editing research',
+      technology_readiness: 5,
+      research_phase: 'Development',
+      peer_reviewed: true
+    },
+    timeline_info: {
+      start_date: '2024-07-15',
+      next_milestone: '2025-01-15',
+      estimated_completion: '2025-06-30',
+      quality_grade: 'A'
+    },
+    financial: {
+      funding_goal: 250000,
+      current_funding: 125000,
+      token_price: 25,
+      total_supply: 10000
+    }
+  }
+];
